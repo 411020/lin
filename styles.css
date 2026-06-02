@@ -1,0 +1,64 @@
+:root {
+  color-scheme: light;
+  font-family: 'Noto Sans TC', sans-serif;
+}
+body {
+  background: linear-gradient(180deg, #eef2ff 0%, #f8fafc 100%);
+  min-height: 100vh;
+}
+.flashcard-wrapper {
+  perspective: 1400px;
+  width: min(100%, 360px);
+  height: 260px;
+}
+.flashcard {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.8s ease;
+  cursor: pointer;
+}
+.flashcard.is-flipped {
+  transform: rotateY(180deg);
+}
+.face {
+  position: absolute;
+  inset: 0;
+  border-radius: 24px;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.16);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backface-visibility: hidden;
+  padding: 1.75rem;
+}
+.front {
+  background: linear-gradient(135deg, #3b82f6, #6366f1);
+  color: white;
+}
+.back {
+  background: linear-gradient(135deg, #ffffff, #f3f4f6);
+  color: #111827;
+  transform: rotateY(180deg);
+  text-align: left;
+}
+.card-text {
+  letter-spacing: .04em;
+}
+#wordList .list-group-item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+}
+#wordList .word-title {
+  font-weight: 600;
+}
+.btn-small {
+  min-width: 90px;
+}
+@media (max-width: 767px) {
+  .flashcard-wrapper {
+    height: 240px;
+  }
+}
