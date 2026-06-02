@@ -98,15 +98,15 @@ function renderWordList() {
 
   state.words.forEach((entry, index) => {
     const item = document.createElement('div');
-    item.className = 'list-group-item list-group-item-action';
+    item.className = 'word-item';
     item.innerHTML = `
-      <div>
+      <div class="word-item-info">
         <div class="word-title">${entry.word}</div>
-        <div class="text-muted small">${entry.translation || '未填寫'} · ${entry.pos || '未填寫'}</div>
+        <p class="word-meta">${entry.translation || '未填寫'} · ${entry.pos || '未填寫'}</p>
       </div>
-      <div class="d-flex gap-2">
-        <button class="btn btn-sm btn-outline-primary" data-action="edit" data-index="${index}">編輯</button>
-        <button class="btn btn-sm btn-outline-danger" data-action="delete" data-index="${index}">刪除</button>
+      <div class="word-actions">
+        <button class="action-button" data-action="edit" data-index="${index}">編輯</button>
+        <button class="action-button danger" data-action="delete" data-index="${index}">刪除</button>
       </div>
     `;
     elements.wordList.appendChild(item);
@@ -159,7 +159,7 @@ function setFlashcardIndex(index) {
 
 function setAutoFillStatus(message, type = 'info') {
   elements.autoFillStatus.textContent = message;
-  elements.autoFillStatus.className = type === 'error' ? 'text-danger' : 'text-success';
+  elements.autoFillStatus.className = 'status ' + (type === 'error' ? 'error' : 'success');
 }
 
 async function fetchWordInfo(word) {

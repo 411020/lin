@@ -4,108 +4,91 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>背單字練習</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH9nSia7M0BV6lK7c1zJ0ENM1lH/8qwhP5mRC4lvGHFQj0gzOwwZ4dX2DdfF5Ld3" crossorigin="anonymous">
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
-    <div class="container px-3">
-      <a class="navbar-brand" href="#">背單字卡</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navMenu">
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" href="#flashcard" id="flashcardTab">單字卡</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#manage" id="manageTab">單字管理</a>
-          </li>
-        </ul>
-      </div>
+  <header class="navbar">
+    <div class="navbar-inner">
+      <div class="brand">背單字卡</div>
+      <nav class="nav-links">
+        <a href="#flashcard" class="nav-link active" id="flashcardTab">單字卡</a>
+        <a href="#manage" class="nav-link" id="manageTab">單字管理</a>
+      </nav>
     </div>
-  </nav>
+  </header>
 
-  <main class="container py-5">
-    <section id="flashcardSection">
-      <div class="row justify-content-center">
-        <div class="col-lg-8 text-center">
-          <h1 class="mb-4">背單字練習</h1>
-          <div class="flashcard-wrapper mx-auto mb-4" id="flashcardWrapper">
-            <div class="flashcard" id="flashcard">
-              <div class="face front" id="cardFront">
-                <div class="card-text fs-1 fw-bold" id="cardWord">Loading</div>
-              </div>
-              <div class="face back" id="cardBack">
-                <div>
-                  <p class="mb-2"><span class="fw-semibold">翻譯：</span><span id="cardTranslation">-</span></p>
-                  <p class="mb-2"><span class="fw-semibold">詞性：</span><span id="cardPos">-</span></p>
-                  <p class="mb-2"><span class="fw-semibold">例句：</span><span id="cardExample">-</span></p>
-                  <p class="mb-2"><span class="fw-semibold">字根分析：</span><span id="cardRoot">-</span></p>
-                </div>
+  <main class="page-container">
+    <section id="flashcardSection" class="section active-section">
+      <div class="hero">
+        <h1>背單字練習</h1>
+        <div class="flashcard-wrapper" id="flashcardWrapper">
+          <div class="flashcard" id="flashcard">
+            <div class="face front" id="cardFront">
+              <div class="card-text" id="cardWord">Loading</div>
+            </div>
+            <div class="face back" id="cardBack">
+              <div class="back-content">
+                <p><span class="label">翻譯：</span><span id="cardTranslation">-</span></p>
+                <p><span class="label">詞性：</span><span id="cardPos">-</span></p>
+                <p><span class="label">例句：</span><span id="cardExample">-</span></p>
+                <p><span class="label">字根分析：</span><span id="cardRoot">-</span></p>
               </div>
             </div>
           </div>
-          <div class="d-flex justify-content-center gap-2 mb-4">
-            <button class="btn btn-outline-primary" id="prevBtn">上一張</button>
-            <button class="btn btn-outline-primary" id="nextBtn">下一張</button>
-          </div>
-          <div class="text-muted">點擊卡片可翻轉，後面顯示單字詳情。</div>
         </div>
+        <div class="button-row">
+          <button class="button outline" id="prevBtn">上一張</button>
+          <button class="button outline" id="nextBtn">下一張</button>
+        </div>
+        <p class="hint">點擊卡片可翻轉，後面顯示單字詳情。</p>
       </div>
     </section>
 
-    <section id="manageSection" class="d-none">
-      <div class="row">
-        <div class="col-lg-6">
-          <div class="card shadow-sm mb-4">
-            <div class="card-body">
-              <h2 class="card-title mb-3">新增 / 編輯單字</h2>
-              <form id="wordForm">
-                <div class="mb-3">
-                  <label for="wordInput" class="form-label">英文單字</label>
-                  <input type="text" class="form-control" id="wordInput" placeholder="enter" required>
-                </div>
-                <div class="mb-3">
-                  <label for="translationInput" class="form-label">翻譯</label>
-                  <input type="text" class="form-control" id="translationInput" placeholder="翻譯" required>
-                </div>
-                <div class="mb-3">
-                  <label for="posInput" class="form-label">詞性</label>
-                  <input type="text" class="form-control" id="posInput" placeholder="noun / verb / adj" required>
-                </div>
-                <div class="mb-3">
-                  <label for="exampleInput" class="form-label">例句</label>
-                  <textarea class="form-control" id="exampleInput" rows="3" placeholder="例句"></textarea>
-                </div>
-                <div class="mb-3">
-                  <label for="rootInput" class="form-label">字根分析</label>
-                  <textarea class="form-control" id="rootInput" rows="2" placeholder="字根/詞源分析"></textarea>
-                </div>
-                <div class="d-flex flex-wrap gap-2">
-                  <button type="submit" class="btn btn-primary" id="saveWordBtn">儲存單字</button>
-                  <button type="button" class="btn btn-secondary" id="autoFillBtn">自動填入</button>
-                  <button type="button" class="btn btn-outline-secondary" id="clearFormBtn">清除</button>
-                </div>
-              </form>
-              <div class="mt-3" id="autoFillStatus"></div>
-            </div>
+    <section id="manageSection" class="section d-none">
+      <div class="grid">
+        <div class="card">
+          <div class="card-body">
+            <h2>新增 / 編輯單字</h2>
+            <form id="wordForm">
+              <div class="form-group">
+                <label for="wordInput">英文單字</label>
+                <input type="text" id="wordInput" placeholder="enter" required>
+              </div>
+              <div class="form-group">
+                <label for="translationInput">翻譯</label>
+                <input type="text" id="translationInput" placeholder="翻譯" required>
+              </div>
+              <div class="form-group">
+                <label for="posInput">詞性</label>
+                <input type="text" id="posInput" placeholder="noun / verb / adj" required>
+              </div>
+              <div class="form-group">
+                <label for="exampleInput">例句</label>
+                <textarea id="exampleInput" rows="3" placeholder="例句"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="rootInput">字根分析</label>
+                <textarea id="rootInput" rows="2" placeholder="字根/詞源分析"></textarea>
+              </div>
+              <div class="button-row wrap">
+                <button type="submit" class="button primary" id="saveWordBtn">儲存單字</button>
+                <button type="button" class="button" id="autoFillBtn">自動填入</button>
+                <button type="button" class="button secondary" id="clearFormBtn">清除</button>
+              </div>
+            </form>
+            <div id="autoFillStatus" class="status"></div>
           </div>
         </div>
-        <div class="col-lg-6">
-          <div class="card shadow-sm mb-4">
-            <div class="card-body">
-              <h2 class="card-title mb-3">目前單字清單</h2>
-              <div id="wordList" class="list-group"></div>
-            </div>
+        <div class="card">
+          <div class="card-body">
+            <h2>目前單字清單</h2>
+            <div id="wordList" class="word-list"></div>
           </div>
         </div>
       </div>
     </section>
   </main>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-W5O6kwEoXGdR6kD6t2X+V/WYBXcTfJ+xcp3p6zA7o5fDPfhvFnS2FWjD4G2gQ1Zy" crossorigin="anonymous"></script>
   <script src="script.js"></script>
 </body>
 </html>
