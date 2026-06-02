@@ -78,12 +78,16 @@ function updateCard() {
 function showCampaignSection(section) {
   if (section === 'manage') {
     elements.flashcardSection.classList.add('d-none');
+    elements.flashcardSection.classList.remove('active-section');
     elements.manageSection.classList.remove('d-none');
+    elements.manageSection.classList.add('active-section');
     elements.flashcardTab.classList.remove('active');
     elements.manageTab.classList.add('active');
   } else {
     elements.manageSection.classList.add('d-none');
+    elements.manageSection.classList.remove('active-section');
     elements.flashcardSection.classList.remove('d-none');
+    elements.flashcardSection.classList.add('active-section');
     elements.manageTab.classList.remove('active');
     elements.flashcardTab.classList.add('active');
   }
